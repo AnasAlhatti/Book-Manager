@@ -28,4 +28,14 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     fun delete(book: Book) = viewModelScope.launch {
         repository.delete(book)
     }
+
+    fun getFinishedBooks() = repository.getFinishedBooks()
+    fun getBooksUnder20() = repository.getBooksUnder20()
+    fun getBooksUnder50() = repository.getBooksUnder50()
+    fun getBooksAbove50() = repository.getBooksAbove50()
+    fun getBooksUnderPercentage(percent: Int) = repository.getBooksUnderPercentage(percent)
+    fun getBooksAbovePercentage(percent: Int) = repository.getBooksAbovePercentage(percent)
+    fun getBooksByAuthor(author: String) = repository.getBooksByAuthor(author)
+    fun getBooksByTitle(title: String) = repository.getBooksByTitle(title)
+
 }

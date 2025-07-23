@@ -36,6 +36,47 @@ class MainActivity : AppCompatActivity() {
 
         val addButton: FloatingActionButton = findViewById(R.id.fabAdd)
         addButton.setOnClickListener { showAddDialog() }
+
+        val filterButton: FloatingActionButton = findViewById(R.id.fabFilter)
+        filterButton.setOnClickListener {
+            val dialog = FilterDialogFragment(
+                onFilterApplied = { type, value ->
+                    when (type) {
+                        FilterDialogFragment.FilterType.FINISHED -> {
+                            bookViewModel.getFinishedBooks().observe(this) {
+                                bookAdapter.setBooks(it)
+                            }
+                        }
+                        FilterDialogFragment.FilterType.UNDER_PERCENTAGE -> {
+                            bookViewModel.getBooksUnderPercentage(value!!.toInt()).observe(this) {
+                                bookAdapter.setBooks(it)
+                            }
+                        }
+                        FilterDialogFragment.FilterType.ABOVE_PERCENTAGE -> {
+                            bookViewModel.getBooksAbovePercentage(value!!.toInt()).observe(this) {
+                                bookAdapter.setBooks(it)
+                            }
+                        }
+                        FilterDialogFragment.FilterType.AUTHOR -> {
+                            bookViewModel.getBooksByAuthor(value!!).observe(this) {
+                                bookAdapter.setBooks(it)
+                            }
+                        }
+                        FilterDialogFragment.FilterType.TITLE -> {
+                            bookViewModel.getBooksByTitle(value!!).observe(this) {
+                                bookAdapter.setBooks(it)
+                            }
+                        }
+                    }
+                },
+                onClearFilter = {
+                    bookViewModel.allBooks.observe(this) {
+                        bookAdapter.setBooks(it)
+                    }
+                }
+            )
+            dialog.show(supportFragmentManager, "FilterDialog")
+        }
     }
 
     private fun showAddDialog() {
