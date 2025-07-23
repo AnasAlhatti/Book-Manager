@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color -->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="4dp"/>
+            <solid android:color="#E0E0E0"/> <!-- Light gray background -->
+        </shape>
+    </item>
+
+    <!-- Progress fill color (this part gets clipped automatically) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="4dp"/>
+                <solid android:color="#3F51B5"/> <!-- Default color (can be tinted dynamically) -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>
