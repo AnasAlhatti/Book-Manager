@@ -15,12 +15,36 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bookViewModel: BookViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var bookAdapter: BookAdapter
-
+    private lateinit var filterPrefs: FilterPreferences
+    private fun applySavedFilter() {
+        val (type, value) = filterPrefs.getFilter()
+        if (type != null) {
+            when (type) {
+                "FINISHED" -> bookViewModel.getFinishedBooks().observe(this) {
+                    bookAdapter.setBooks(it)
+                }
+                "UNDER" -> bookViewModel.getBooksUnderPercentage(value!!.toInt()).observe(this) {
+                    bookAdapter.setBooks(it)
+                }
+                "ABOVE" -> bookViewModel.getBooksAbovePercentage(value!!.toInt()).observe(this) {
+                    bookAdapter.setBooks(it)
+                }
+                "AUTHOR" -> bookViewModel.getBooksByAuthor(value!!).observe(this) {
+                    bookAdapter.setBooks(it)
+                }
+                "TITLE" -> bookViewModel.getBooksByTitle(value!!).observe(this) {
+                    bookAdapter.setBooks(it)
+                }
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         bookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
+        filterPrefs = FilterPreferences(this)
+        applySavedFilter()
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -43,26 +67,31 @@ class MainActivity : AppCompatActivity() {
                 onFilterApplied = { type, value ->
                     when (type) {
                         FilterDialogFragment.FilterType.FINISHED -> {
+                            filterPrefs.saveFilter("FINISHED", null)
                             bookViewModel.getFinishedBooks().observe(this) {
                                 bookAdapter.setBooks(it)
                             }
                         }
                         FilterDialogFragment.FilterType.UNDER_PERCENTAGE -> {
+                            filterPrefs.saveFilter("UNDER", value)
                             bookViewModel.getBooksUnderPercentage(value!!.toInt()).observe(this) {
                                 bookAdapter.setBooks(it)
                             }
                         }
                         FilterDialogFragment.FilterType.ABOVE_PERCENTAGE -> {
+                            filterPrefs.saveFilter("ABOVE", value)
                             bookViewModel.getBooksAbovePercentage(value!!.toInt()).observe(this) {
                                 bookAdapter.setBooks(it)
                             }
                         }
                         FilterDialogFragment.FilterType.AUTHOR -> {
+                            filterPrefs.saveFilter("AUTHOR", value)
                             bookViewModel.getBooksByAuthor(value!!).observe(this) {
                                 bookAdapter.setBooks(it)
                             }
                         }
                         FilterDialogFragment.FilterType.TITLE -> {
+                            filterPrefs.saveFilter("TITLE", value)
                             bookViewModel.getBooksByTitle(value!!).observe(this) {
                                 bookAdapter.setBooks(it)
                             }
@@ -70,6 +99,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 },
                 onClearFilter = {
+                    filterPrefs.clearFilter()
                     bookViewModel.allBooks.observe(this) {
                         bookAdapter.setBooks(it)
                     }
