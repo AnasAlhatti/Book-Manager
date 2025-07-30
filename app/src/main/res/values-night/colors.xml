@@ -5,6 +5,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#E0E0E0</color>
     <color name="dark_gray">#A9A9A9</color>
-    <color name="primary">#6200EE</color>
-     <!-- Dark background -->
+    <color name="primary">#6A1B9A</color>  <!-- deep purple -->
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="fabBackground">#6A1B9A</color>
+    <color name="buttonText">#FFFFFF</color>
 </resources>

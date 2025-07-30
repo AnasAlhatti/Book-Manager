@@ -39,8 +39,11 @@ class BookAdapter(
         val book = books[position]
         holder.titleText.text = book.title
         holder.authorText.text = "by ${book.author}"
-        val progress = if (book.totalPages == 0) 0 else
+        val progress = if (book.totalPages <= 0 || book.pagesRead < 0 || book.pagesRead > book.totalPages) {
+            0
+        } else {
             (book.pagesRead.toFloat() / book.totalPages * 100).toInt()
+        }
         holder.progressText.text = "Progress: $progress%"
         holder.progressBar.progress = progress
         val context = holder.itemView.context

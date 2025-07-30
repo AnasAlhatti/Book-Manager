@@ -4,6 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#E0E0E0</color>
     <color name="dark_gray">#A9A9A9</color>
-    <color name="primary">#6200EE</color>
+    <color name="primary">#E0BBFF</color>  <!-- pastel purple -->
+    <color name="onPrimary">#000000</color>
+    <color name="fabBackground">#E0BBFF</color>
+    <color name="buttonText">#000000</color>
     <color name="colorBackground">#FFFFFF</color>
 </resources>

@@ -12,7 +12,20 @@
           "package_name": "com.example.BookManager"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "497412411867-kqinooui36mpiijfttuuj8u7f1h9h624.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.BookManager",
+            "certificate_hash": "5baa1fcc4a769597fbd341559448e2b4e71e0903"
+          }
+        },
+        {
+          "client_id": "497412411867-g3og8qeftpuvnn0gvddbr30p0t9ma60g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCCePfg4QTXqiUJ1sA4W6M5mGT7ykqlQz4"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497412411867-g3og8qeftpuvnn0gvddbr30p0t9ma60g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

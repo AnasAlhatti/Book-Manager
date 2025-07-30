@@ -15,6 +15,11 @@ interface BookDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(book: Book)
 
+    @Query("SELECT * FROM book_table WHERE uuid = :uuid LIMIT 1")
+    suspend fun getBookByUuid(uuid: String): Book?
+
+    @Query("SELECT * FROM book_table")
+    suspend fun getAllBooksNow(): List<Book>
     @Update
     suspend fun update(book: Book)
 
@@ -23,15 +28,6 @@ interface BookDao {
 
     @Query("SELECT * FROM book_table WHERE (pagesRead * 1.0 / totalPages) * 100 = 100")
     fun getFinishedBooks(): LiveData<List<Book>>
-
-    @Query("SELECT * FROM book_table WHERE (pagesRead * 1.0 / totalPages) * 100 < 20")
-    fun getBooksUnder20(): LiveData<List<Book>>
-
-    @Query("SELECT * FROM book_table WHERE (pagesRead * 1.0 / totalPages) * 100 < 50")
-    fun getBooksUnder50(): LiveData<List<Book>>
-
-    @Query("SELECT * FROM book_table WHERE (pagesRead * 1.0 / totalPages) * 100 >= 50")
-    fun getBooksAbove50(): LiveData<List<Book>>
 
     @Query("SELECT * FROM book_table WHERE (pagesRead * 1.0 / totalPages) * 100 < :percentage")
     fun getBooksUnderPercentage(percentage: Int): LiveData<List<Book>>
@@ -44,4 +40,10 @@ interface BookDao {
 
     @Query("SELECT * FROM book_table WHERE LOWER(title) LIKE LOWER(:title)")
     fun getBooksByTitle(title: String): LiveData<List<Book>>
+
+    @Query("SELECT * FROM book_table WHERE id = :bookId LIMIT 1")
+    suspend fun getBookById(bookId: Int): Book?
+
+    @Query("DELETE FROM book_table")
+    suspend fun deleteAll()
 }

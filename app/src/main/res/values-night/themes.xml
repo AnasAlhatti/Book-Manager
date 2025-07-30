@@ -1,11 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.BookManager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your dark theme colors -->
-        <item name="colorPrimary">#BB86FC</item>
-        <item name="colorPrimaryVariant">#3700B3</item>
-        <item name="colorOnPrimary">#000000</item>
-        <item name="colorSecondary">#03DAC5</item>
-        <item name="android:colorBackground">#121212</item>
-        <item name="android:windowBackground">?attr/android:colorBackground</item>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.BookManager" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
     </style>
+
+    <style name="Theme.BookManager" parent="Base.Theme.BookManager" />
 </resources>
