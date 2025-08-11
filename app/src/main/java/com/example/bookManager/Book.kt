@@ -1,4 +1,4 @@
-package com.example.BookManager
+package com.example.bookManager
 
 import android.os.Parcelable
 import androidx.room.Entity

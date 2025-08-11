@@ -1,4 +1,4 @@
-package com.example.BookManager
+package com.example.bookManager
 
 import android.content.Context
 import android.content.SharedPreferences

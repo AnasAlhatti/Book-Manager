@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.BookManager"
+    namespace = "com.example.bookManager"
     compileSdk = 36
 
     defaultConfig {

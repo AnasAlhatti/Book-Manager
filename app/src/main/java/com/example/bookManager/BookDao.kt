@@ -1,4 +1,4 @@
-package com.example.BookManager
+package com.example.bookManager
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

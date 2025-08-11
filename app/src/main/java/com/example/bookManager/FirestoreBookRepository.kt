@@ -1,4 +1,4 @@
-package com.example.BookManager
+package com.example.bookManager
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth

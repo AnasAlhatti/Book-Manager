@@ -1,4 +1,4 @@
-package com.example.BookManager
+package com.example.bookManager
 
 import org.junit.Test
 
