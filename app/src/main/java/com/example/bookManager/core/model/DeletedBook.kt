@@ -1,4 +1,4 @@
-package com.example.bookManager
+package com.example.bookManager.core.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,4 +7,3 @@ import androidx.room.PrimaryKey
 data class DeletedBook(
     @PrimaryKey val uuid: String
 )
-

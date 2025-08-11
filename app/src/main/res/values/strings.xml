@@ -3,4 +3,5 @@
     google-services.json: <string name="default_web_client_id" translatable="false">497412411867-g3og8qeftpuvnn0gvddbr30p0t9ma60g.apps.googleusercontent.com</string>
     <string name="navigation_drawer_open">Open drawer</string>
     <string name="navigation_drawer_close">Close drawer</string>
+    <string name="log_out">Log Out</string>
 </resources>

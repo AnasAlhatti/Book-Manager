@@ -1,84 +1,71 @@
-package com.example.bookManager
+package com.example.bookManager.core.data.repo
 
-import androidx.lifecycle.LiveData
-import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
+import com.example.bookManager.core.data.local.BookDao
+import com.example.bookManager.core.data.local.DeletedBookDao
+import com.example.bookManager.core.model.Book
+import com.example.bookManager.core.model.DeletedBook
 import java.util.UUID
 
-class BookRepository(
+class BookRepositoryImpl(
     private val bookDao: BookDao,
-    private val deletedBookDao: DeletedBookDao,
-    context: Context,
-    useCloud: Boolean
-) {
-    val allBooks: LiveData<List<Book>> = bookDao.getAllBooks()
-    // Cloud operations are now handled by ViewModel using FirestoreBookRepository
+    private val deletedBookDao: DeletedBookDao
+) : BookRepository {
 
-    suspend fun insert(book: Book) {
+    override val allBooks: LiveData<List<Book>> = bookDao.getAllBooks()
+
+    override suspend fun insert(book: Book) {
         try {
-            // Ensure UUID is set before inserting
             if (book.uuid.isBlank()) {
                 book.uuid = UUID.randomUUID().toString()
                 Log.d("BookRepository", "Generated UUID for new book: ${book.uuid}")
             }
-
             bookDao.insert(book)
             Log.d("BookRepository", "Book inserted locally: ${book.uuid}")
-
-            // Note: Cloud sync is handled by ViewModel, not here
         } catch (e: Exception) {
             Log.e("BookRepository", "Error inserting book", e)
             throw e
         }
     }
 
-    suspend fun update(book: Book) {
+    override suspend fun update(book: Book) {
         try {
-            // Ensure UUID is set before updating
             if (book.uuid.isBlank()) {
                 book.uuid = UUID.randomUUID().toString()
                 Log.d("BookRepository", "Generated UUID for existing book: ${book.uuid}")
             }
-
             bookDao.update(book)
             Log.d("BookRepository", "Book updated locally: ${book.uuid}")
-
-            // Note: Cloud sync is handled by ViewModel, not here
         } catch (e: Exception) {
             Log.e("BookRepository", "Error updating book", e)
             throw e
         }
     }
 
-    suspend fun delete(book: Book) {
+    override suspend fun delete(book: Book) {
         try {
             bookDao.delete(book)
-
-            // Track deletion for sync purposes
             if (book.uuid.isNotBlank()) {
                 deletedBookDao.insert(DeletedBook(book.uuid))
                 Log.d("BookRepository", "Book deleted and tracked: ${book.uuid}")
             } else {
                 Log.w("BookRepository", "Deleted book has no UUID, cannot track for cloud sync")
             }
-
-            // Note: Cloud sync is handled by ViewModel, not here
         } catch (e: Exception) {
             Log.e("BookRepository", "Error deleting book", e)
             throw e
         }
     }
 
-    suspend fun deleteAll() {
+    override suspend fun deleteAll() {
         try {
-            // Get all books before deleting to track UUIDs
             val allBooks = bookDao.getAllBooksNow()
             for (book in allBooks) {
                 if (book.uuid.isNotBlank()) {
                     deletedBookDao.insert(DeletedBook(book.uuid))
                 }
             }
-
             bookDao.deleteAll()
             Log.d("BookRepository", "All books deleted locally and tracked for cloud sync")
         } catch (e: Exception) {
@@ -87,7 +74,7 @@ class BookRepository(
         }
     }
 
-    suspend fun getDeletedUuids(): List<String> {
+    override suspend fun getDeletedUuids(): List<String> {
         return try {
             deletedBookDao.getAll().map { it.uuid }
         } catch (e: Exception) {
@@ -96,7 +83,7 @@ class BookRepository(
         }
     }
 
-    suspend fun clearDeletedUuids() {
+    override suspend fun clearDeletedUuids() {
         try {
             deletedBookDao.clear()
             Log.d("BookRepository", "Deleted UUIDs cleared")
@@ -105,7 +92,7 @@ class BookRepository(
         }
     }
 
-    suspend fun getAllBooksOnce(): List<Book> {
+    override suspend fun getAllBooksOnce(): List<Book> {
         return try {
             bookDao.getAllBooksNow()
         } catch (e: Exception) {
@@ -114,7 +101,7 @@ class BookRepository(
         }
     }
 
-    suspend fun getBookByUuid(uuid: String): Book? {
+    override suspend fun getBookByUuid(uuid: String): Book? {
         return try {
             bookDao.getBookByUuid(uuid)
         } catch (e: Exception) {
@@ -123,9 +110,13 @@ class BookRepository(
         }
     }
 
-    fun getFinishedBooks() = bookDao.getFinishedBooks()
-    fun getBooksUnderPercentage(percent: Int) = bookDao.getBooksUnderPercentage(percent)
-    fun getBooksAbovePercentage(percent: Int) = bookDao.getBooksAbovePercentage(percent)
-    fun getBooksByAuthor(author: String) = bookDao.getBooksByAuthor("%$author%")
-    fun getBooksByTitle(title: String) = bookDao.getBooksByTitle("%$title%")
+    override fun getFinishedBooks() = bookDao.getFinishedBooks()
+
+    override fun getBooksUnderPercentage(percent: Int) = bookDao.getBooksUnderPercentage(percent)
+
+    override fun getBooksAbovePercentage(percent: Int) = bookDao.getBooksAbovePercentage(percent)
+
+    override fun getBooksByAuthor(author: String) = bookDao.getBooksByAuthor("%$author%")
+
+    override fun getBooksByTitle(title: String) = bookDao.getBooksByTitle("%$title%")
 }

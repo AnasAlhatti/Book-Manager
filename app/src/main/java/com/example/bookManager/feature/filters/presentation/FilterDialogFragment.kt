@@ -1,10 +1,15 @@
-package com.example.bookManager
+package com.example.bookManager.feature.filters.presentation
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.example.bookManager.R
 
 class FilterDialogFragment(
     private val onFilterApplied: (FilterType, String?) -> Unit,
@@ -34,7 +39,8 @@ class FilterDialogFragment(
             "Books by title"
         )
 
-        spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, options)
+        spinner.adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, options)
 
         applyButton.setOnClickListener {
             val selected = spinner.selectedItem.toString()

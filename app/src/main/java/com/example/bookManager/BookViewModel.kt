@@ -4,15 +4,19 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.bookManager.core.data.local.BookDatabase
+import com.example.bookManager.core.data.remote.FirestoreBookDataSource
+import com.example.bookManager.core.data.repo.BookRepositoryImpl
+import com.example.bookManager.core.model.Book
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import java.util.UUID
 
 class BookViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository: BookRepository
+    private val repository: BookRepositoryImpl
     val allBooks: LiveData<List<Book>>
-    private val cloudRepo = FirestoreBookRepository()
+    private val cloudRepo = FirestoreBookDataSource()
 
     init {
         val db = BookDatabase.getDatabase(application)
@@ -21,7 +25,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
         // Firebase safe: only pass remote=true if user is signed in
         val useCloud = FirebaseAuth.getInstance().currentUser != null
-        repository = BookRepository(dao, deletedDao, application.applicationContext, useCloud)
+        repository = BookRepositoryImpl(dao, deletedDao)
 
         allBooks = repository.allBooks
     }
@@ -72,17 +76,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteAll() {
-        viewModelScope.launch {
-            repository.deleteAll()
 
-            // Only clear cloud if user is authenticated (not anonymous)
-            val currentUser = FirebaseAuth.getInstance().currentUser
-            if (currentUser != null && !currentUser.isAnonymous) {
-                cloudRepo.clearCloudData()
-            }
-        }
-    }
 
     fun syncWithCloud(onComplete: () -> Unit = {}) {
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -161,4 +155,11 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     fun getBooksByTitle(title: String) = repository.getBooksByTitle(title)
 
     val repositoryAccess get() = repository
+
+    fun clearLocalData() {
+        viewModelScope.launch {
+            repository.deleteAll()
+            repository.clearDeletedUuids()
+        }
+    }
 }

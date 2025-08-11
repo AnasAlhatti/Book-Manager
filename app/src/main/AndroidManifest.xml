@@ -11,15 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookManager">
         <activity
-            android:name=".LauncherActivity"
+            android:name=".auth.presentation.LauncherActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".auth.presentation.RegisterActivity" />
+        <activity android:name=".auth.presentation.LoginActivity" />
         <activity android:name=".MainActivity" />
     </application>
 

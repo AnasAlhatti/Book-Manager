@@ -1,4 +1,4 @@
-package com.example.bookManager
+package com.example.bookManager.core.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,12 +7,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.bookManager.core.model.Book
 
 @Dao
 interface BookDao {
     @Query("SELECT * FROM book_table ORDER BY id DESC")
     fun getAllBooks(): LiveData<List<Book>>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(book: Book)
 
     @Query("SELECT * FROM book_table WHERE uuid = :uuid LIMIT 1")

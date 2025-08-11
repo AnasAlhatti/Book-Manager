@@ -1,10 +1,13 @@
-package com.example.bookManager
+package com.example.bookManager.auth.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bookManager.BookViewModel
+import com.example.bookManager.MainActivity
+import com.example.bookManager.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -46,7 +49,10 @@ class LoginActivity : AppCompatActivity() {
 
             if (email.isNotBlank() && pass.length >= 6) {
                 auth.signInWithEmailAndPassword(email, pass)
-                    .addOnSuccessListener { goToMain() }
+                    .addOnSuccessListener {
+                        BookViewModel(application).clearLocalData()
+                        goToMain()
+                    }
                     .addOnFailureListener { showToast("Login failed: ${it.message}") }
             } else {
                 showToast("Enter valid email and 6+ character password")
@@ -68,7 +74,10 @@ class LoginActivity : AppCompatActivity() {
                 .setMessage("Your books will not be saved in the cloud. You can sign in later to back up your data.")
                 .setPositiveButton("Continue") { _, _ ->
                     auth.signInAnonymously()
-                        .addOnSuccessListener { goToMain() }
+                        .addOnSuccessListener {
+                            BookViewModel(application).clearLocalData()
+                            goToMain()
+                        }
                         .addOnFailureListener { showToast("Guest login failed") }
                 }
                 .setNegativeButton("Cancel", null)
@@ -94,7 +103,10 @@ class LoginActivity : AppCompatActivity() {
                 val account: GoogleSignInAccount = task.result!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 auth.signInWithCredential(credential)
-                    .addOnSuccessListener { goToMain() }
+                    .addOnSuccessListener {
+                        BookViewModel(application).clearLocalData()
+                        goToMain()
+                    }
                     .addOnFailureListener { showToast("Google sign-in failed") }
             } catch (e: Exception) {
                 showToast("Google sign-in error: ${e.message}")

@@ -12,6 +12,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookManager.auth.presentation.LoginActivity
+import com.example.bookManager.core.model.Book
+import com.example.bookManager.core.util.FilterPreferences
+import com.example.bookManager.feature.bookedit.presentation.AddEditBookDialogFragment
+import com.example.bookManager.feature.books.presentation.BookAdapter
+import com.example.bookManager.feature.filters.presentation.FilterDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -92,7 +98,8 @@ class MainActivity : AppCompatActivity() {
         val navigationView = findViewById<NavigationView>(R.id.navigationView)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             if (menuItem.itemId == R.id.nav_logout) {
-                // Sign out and go to login
+                // Clear local data before logout
+                bookViewModel.clearLocalData()
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()

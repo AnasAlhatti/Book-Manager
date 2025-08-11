@@ -1,4 +1,4 @@
-package com.example.bookManager
+package com.example.bookManager.feature.books.presentation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookManager.R
+import com.example.bookManager.core.model.Book
 
 class BookAdapter(
     private val onEditClick: (Book) -> Unit,
@@ -25,7 +27,7 @@ class BookAdapter(
         val totalPages: TextView = itemView.findViewById(R.id.totalPages)
         val deleteButton: ImageButton = itemView.findViewById(R.id.deleteButton)
         val editButton: ImageButton = itemView.findViewById(R.id.editButton)
-        val progressBar: ProgressBar     = itemView.findViewById(R.id.progressBar)
+        val progressBar: ProgressBar = itemView.findViewById(R.id.progressBar)
         val checkmark: ImageView = itemView.findViewById(R.id.checkmark)
 
     }

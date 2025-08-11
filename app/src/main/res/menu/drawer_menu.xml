@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_placeholder"
-        android:title="Settings (coming soon)"
-        android:icon="@android:drawable/ic_menu_preferences" />
 
     <item
         android:id="@+id/nav_logout"
-        android:title="Log Out"
+        android:title="@string/log_out"
         android:icon="@android:drawable/ic_lock_power_off" />
 </menu>

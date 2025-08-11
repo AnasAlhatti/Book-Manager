@@ -1,11 +1,12 @@
-package com.example.bookManager
+package com.example.bookManager.core.data.remote
 
 import android.util.Log
+import com.example.bookManager.core.model.Book
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.UUID
 
-class FirestoreBookRepository {
+class FirestoreBookDataSource {
 
     private val firestore = FirebaseFirestore.getInstance()
     private val userId: String

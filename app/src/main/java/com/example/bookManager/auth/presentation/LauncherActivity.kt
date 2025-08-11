@@ -1,8 +1,9 @@
-package com.example.bookManager
+package com.example.bookManager.auth.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bookManager.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LauncherActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.bookManager
+package com.example.bookManager.feature.bookedit.presentation
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -8,6 +8,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import com.example.bookManager.BookViewModel
+import com.example.bookManager.core.model.Book
+import com.google.android.material.R
 import java.util.UUID
 
 class AddEditBookDialogFragment : DialogFragment() {
@@ -24,16 +27,16 @@ class AddEditBookDialogFragment : DialogFragment() {
     private val bookViewModel: BookViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(requireContext(), com.google.android.material.R.style.Theme_MaterialComponents_Dialog_Alert)
+        val builder = AlertDialog.Builder(requireContext(), R.style.Theme_MaterialComponents_Dialog_Alert)
         val inflater = requireActivity().layoutInflater
-        val view = inflater.inflate(R.layout.dialog_add_edit_book, null)
+        val view = inflater.inflate(com.example.bookManager.R.layout.dialog_add_edit_book, null)
 
-        titleEditText = view.findViewById(R.id.editTextTitle)
-        authorEditText = view.findViewById(R.id.editTextAuthor)
-        pagesEditText = view.findViewById(R.id.editTextPages)
-        totalPagesEditText = view.findViewById(R.id.editTotalPages)
-        saveButton = view.findViewById(R.id.buttonSave)
-        cancelButton = view.findViewById(R.id.buttonCancel)
+        titleEditText = view.findViewById(com.example.bookManager.R.id.editTextTitle)
+        authorEditText = view.findViewById(com.example.bookManager.R.id.editTextAuthor)
+        pagesEditText = view.findViewById(com.example.bookManager.R.id.editTextPages)
+        totalPagesEditText = view.findViewById(com.example.bookManager.R.id.editTotalPages)
+        saveButton = view.findViewById(com.example.bookManager.R.id.buttonSave)
+        cancelButton = view.findViewById(com.example.bookManager.R.id.buttonCancel)
 
         arguments?.let {
             existingBook = it.getParcelable(ARG_BOOK)
