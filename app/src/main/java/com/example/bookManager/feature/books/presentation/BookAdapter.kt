@@ -1,5 +1,6 @@
 package com.example.bookManager.feature.books.presentation
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class BookAdapter(
         return BookViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = books[position]
         holder.titleText.text = book.title
@@ -64,6 +66,7 @@ class BookAdapter(
 
     override fun getItemCount() = books.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setBooks(bookList: List<Book>) {
         books = bookList
         notifyDataSetChanged()

@@ -138,16 +138,6 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun uploadToCloud(book: Book) {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null && !currentUser.isAnonymous) {
-            if (book.uuid.isBlank()) {
-                book.uuid = UUID.randomUUID().toString()
-            }
-            cloudRepo.uploadBook(book)
-        }
-    }
-
     fun getFinishedBooks() = repository.getFinishedBooks()
     fun getBooksUnderPercentage(percent: Int) = repository.getBooksUnderPercentage(percent)
     fun getBooksAbovePercentage(percent: Int) = repository.getBooksAbovePercentage(percent)

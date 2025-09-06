@@ -2,6 +2,7 @@ package com.example.bookManager.core.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
 class FilterPreferences(context: Context) {
     private val prefs: SharedPreferences =
@@ -21,6 +22,6 @@ class FilterPreferences(context: Context) {
     }
 
     fun clearFilter() {
-        prefs.edit().clear().apply()
+        prefs.edit { clear() }
     }
 }

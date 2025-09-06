@@ -133,29 +133,4 @@ class FirestoreBookDataSource {
             }
     }
 
-    fun clearCloudData() {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser == null || currentUser.isAnonymous) {
-            Log.w("FirestoreClear", "Cannot clear - user not authenticated")
-            return
-        }
-
-        booksCollection().get()
-            .addOnSuccessListener { snapshot ->
-                val batch = firestore.batch()
-                for (document in snapshot.documents) {
-                    batch.delete(document.reference)
-                }
-                batch.commit()
-                    .addOnSuccessListener {
-                        Log.d("FirestoreClear", "All cloud data cleared successfully")
-                    }
-                    .addOnFailureListener { e ->
-                        Log.e("FirestoreClear", "Failed to clear cloud data", e)
-                    }
-            }
-            .addOnFailureListener { e ->
-                Log.e("FirestoreClear", "Failed to fetch documents for clearing", e)
-            }
-    }
 }
