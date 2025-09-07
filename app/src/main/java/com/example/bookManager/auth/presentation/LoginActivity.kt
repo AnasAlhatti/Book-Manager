@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.bookManager.BookViewModel
+import com.example.bookManager.feature.books.presentation.BookViewModel
 import com.example.bookManager.MainActivity
 import com.example.bookManager.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn

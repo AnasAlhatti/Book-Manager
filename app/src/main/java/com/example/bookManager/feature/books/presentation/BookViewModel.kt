@@ -1,4 +1,4 @@
-package com.example.bookManager
+package com.example.bookManager.feature.books.presentation
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -19,7 +19,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     private val cloudRepo = FirestoreBookDataSource()
 
     init {
-        val db = BookDatabase.getDatabase(application)
+        val db = BookDatabase.Companion.getDatabase(application)
         val dao = db.bookDao()
         val deletedDao = db.deletedBookDao()
 

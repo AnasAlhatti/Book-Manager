@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.bookManager.BookViewModel
+import com.example.bookManager.feature.books.presentation.BookViewModel
 import com.example.bookManager.core.model.Book
 import com.google.android.material.R
 import java.util.UUID

@@ -17,6 +17,7 @@ import com.example.bookManager.core.model.Book
 import com.example.bookManager.core.util.FilterPreferences
 import com.example.bookManager.feature.bookedit.presentation.AddEditBookDialogFragment
 import com.example.bookManager.feature.books.presentation.BookAdapter
+import com.example.bookManager.feature.books.presentation.BookViewModel
 import com.example.bookManager.feature.filters.presentation.FilterDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
