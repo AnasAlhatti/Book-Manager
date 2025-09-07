@@ -58,35 +58,35 @@ A simple Android app to track your reading list. Add books, update reading progr
 com.example.bookManager
 │
 ├─ auth.presentation
-│  ├─ LauncherActivity
-│  ├─ LoginActivity
-│  └─ RegisterActivity
+│ ├─ LauncherActivity
+│ ├─ LoginActivity
+│ └─ RegisterActivity
 │
 ├─ core
-│  ├─ data
-│  │  ├─ local
-│  │  │  ├─ BookDao
-│  │  │  ├─ DeletedBookDao
-│  │  │  └─ BookDatabase
-│  │  └─ remote
-│  │     └─ FirestoreBookDataSource
-│  ├─ repo
-│  │  ├─ BookRepository
-│  │  └─ BookRepositoryImpl
-│  ├─ model
-│  │  ├─ Book
-│  │  └─ DeletedBook
-│  └─ util
-│     └─ FilterPreferences
+│ ├─ data
+│ │ ├─ local
+│ │ │ ├─ BookDao
+│ │ │ ├─ DeletedBookDao
+│ │ │ └─ BookDatabase
+│ │ └─ remote
+│ │ └─ FirestoreBookDataSource
+│ ├─ repo
+│ │ ├─ BookRepository
+│ │ └─ BookRepositoryImpl
+│ ├─ model
+│ │ ├─ Book
+│ │ └─ DeletedBook
+│ └─ util
+│ └─ FilterPreferences
 │
 ├─ feature
-│  ├─ bookedit.presentation
-│  │  └─ AddEditBookDialogFragment
-│  ├─ books.presentation
-│  │  ├─ BookAdapter
-│  │  └─ BookViewModel
-│  └─ filters.presentation
-│     └─ FilterDialogFragment
+│ ├─ bookedit.presentation
+│ │ └─ AddEditBookDialogFragment
+│ ├─ books.presentation
+│ │ ├─ BookAdapter
+│ │ └─ BookViewModel
+│ └─ filters.presentation
+│ └─ FilterDialogFragment
 │
 └─ MainActivity
 
