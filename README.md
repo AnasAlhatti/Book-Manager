@@ -55,6 +55,7 @@ A simple Android app to track your reading list. Add books, update reading progr
 -   **Preferences:** DataStore for filters
 
 ## Project Structure
+```
 com.example.bookManager
 │
 ├─ auth.presentation
@@ -89,6 +90,7 @@ com.example.bookManager
 │     └─ FilterDialogFragment
 │
 └─ MainActivity
+```
 
 ## Getting Started
 
