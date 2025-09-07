@@ -24,10 +24,17 @@ A simple Android app to track your reading list. Add books, update reading progr
 
 ## Screenshots
 
-Login							 Create Account
-<img src="screenshots/login.jpg" width="300"><img src="screenshots/Create_account.jpg" width="300">
-Home                      Add or Edit Book
-<img src="screenshots/home.jpg" width="300"><img src="screenshots/add_edit.jpg" width="300">
+### Authentication
+
+| Login | Create Account |
+|-------|----------------|
+| ![Login](docs/screenshots/LOGIN.jpg) | ![Create Account](docs/screenshots/Create account.jpg) |
+
+### Main App
+
+| Home | Add / Edit Book |
+|------|-----------------|
+| ![Home](docs/screenshots/Home.jpg) | ![Add Edit Book](docs/screenshots/add edit.jpg) |
 
 ## Tech Stack
 
