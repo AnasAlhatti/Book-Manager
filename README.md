@@ -108,7 +108,7 @@ com.example.bookManager
 ### Setup
 
 1.  Clone the repo
-git clone https://github.com/AnasAlhatti/BookManager.git
+git clone https://github.com/AnasAlhatti/Book-Manager.git
 cd BookManager
 2. Open in Android Studio and let Gradle sync.
     
@@ -137,19 +137,6 @@ If Firebase isn’t configured, the app works offline with Room storage only.
 -   **FirestoreBookDataSource** syncs data when authenticated
     
 -   **FilterPreferences** handles user filter/sort settings
-    
-
-----------
-
-## Roadmap
-
--   Undo delete with Snackbar
-    
--   Sorting options (title, progress, etc.)
-    
--   Import/export as JSON
-    
--   Theme toggle (dark/light)
     
 
 ----------
